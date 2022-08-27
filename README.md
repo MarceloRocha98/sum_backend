@@ -2,6 +2,8 @@
 
 O frontend pode ser encontrado [aqui](https://github.com/MarceloRocha98/sum_frontend)
 
+A demonstração pode ser observada aqui:
+[https://www.loom.com/share/f10ff5588d68489f845d915f25323d](https://www.loom.com/share/f10ff5588d68489f845d915f25323da3)
 # Observações
 
 1) O programa responsável pela atualização automática do banco através do "blotter_generator.py" é o "blotter_service.py"
