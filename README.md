@@ -1,4 +1,4 @@
-# Backend e atualizador do banco por arquivo do projeto
+# Backend da aplicação e arquivo responsável pela atualização do banco
 
 O frontend pode ser encontrado [aqui](https://github.com/MarceloRocha98/sum_frontend)
 
