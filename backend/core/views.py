@@ -36,9 +36,27 @@ class BlotterViewSet(viewsets.ModelViewSet):
     filterset_fields = ['ticker', 'price','volume']
 
     def create(self, request, *args, **kwargs):
-        body = json.loads(request.body)
+        # body = json.loads(request.body)
+        body = request.data
 
-        # checar se o usuario existe
+        try:
+            if(body['ticker'] is None or body['price'] is None or body['volume'] is None):
+                return Response({"erro":"Parametro(s) invalido(s)"}, 400)
+        except:
+            pass
+
+
+
+        # se nao passou email e nome e passou user_id (rota padrao do django (http://localhost:8000/trading/blotter/) ), adicionar normalmente
+        try:
+            u_id = body['user']
+            newBlotter = Blotter(user_id=u_id, ticker=body['ticker'].upper(), price=body['price'], volume=body['volume'])
+            newBlotter.save()
+
+            return Response("ok",200)
+        except:
+            pass
+        # se passou email e nome, verificar se o usuario existe, se nao existe, tentar adiciona-lo
         user = User.objects.filter(email = body['email'], name=body['name']).first()
         if(user is None):
             try:
@@ -49,7 +67,7 @@ class BlotterViewSet(viewsets.ModelViewSet):
         
 
         try:
-            newBlotter = Blotter(user_id=user.id, ticker=body['ticker'], price=body['price'], volume=body['volume'])
+            newBlotter = Blotter(user_id=user.id, ticker=body['ticker'].upper(), price=body['price'], volume=body['volume'])
             newBlotter.save()
         except:
              return Response({"erro":"Parametro(s) invalido(s)"}, 400)
